@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="UdemySupportExtension" content="Productivity tool made in Brython">
+<meta charset="iso-8859-1">
+<style>
+body {    
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 800;
+}
+ 
+#frame {
+    overflow: hidden;
+    width:790;
+    height:324;
+}
+</style>
+<script type="text/javascript" src="C:\Users\maison\Desktop\UdemyBuddy\Brython\brython.js"></script>
+<script type="text/javascript" src="C:\Users\maison\Desktop\UdemyBuddy\Brython\brython_stdlib.js"></script>
+</head>
+
+<body onLoad="brython()">
+
+<script type="text/python">
+from browser import doc
+import re
+from bs4 import BeautifulSoup
+import json
+import ast
+import pandas as pd
+soup=BeautifulSoup(raw_html, "html.parser")
+extract=soup.select('script[type="text/preload"]')[13].text
+extract=re.sub('\s+',' ',extract)
+dico=json.loads(extract)
+customer_type=dico['ticket']['custom_fields'][0]['value']
+ticket_type=dico['ticket']['custom_fields'][1]['value']
+course_url=dico['ticket']['custom_fields'][33]['value'].split()
+body_urls = re.findall('https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', dico['ticket']['description'])
+
+</script>
+
+
+</body>
+</html>
